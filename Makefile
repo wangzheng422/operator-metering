@@ -19,7 +19,7 @@ DOCKER_BASE_URL = $(IMAGE_REPOSITORY)/$(IMAGE_ORG)
 
 METERING_OPERATOR_IMAGE_NAME = metering-helm-operator
 REPORTING_OPERATOR_IMAGE_NAME = metering-reporting-operator
-METERING_E2E_IMAGE_NAME = metering-e2e
+METERING_SRC_IMAGE_NAME = metering-src
 PRESTO_IMAGE_NAME = presto
 HIVE_IMAGE_NAME = hive
 HDFS_IMAGE_NAME = hadoop
@@ -119,7 +119,7 @@ endif
 DOCKER_COMMON_NAMES := \
 	reporting-operator \
 	metering-operator \
-	metering-e2e
+	metering-src
 
 DOCKER_BUILD_NAMES = $(DOCKER_COMMON_NAMES)
 DOCKER_TAG_NAMES = $(DOCKER_COMMON_NAMES)
@@ -237,7 +237,7 @@ docker-pull-all: $(DOCKER_PULL_TARGETS)
 reporting-operator-docker-build: $(REPORTING_OPERATOR_DOCKERFILE)
 	$(MAKE) docker-build DOCKERFILE=$< IMAGE_NAME=$(REPORTING_OPERATOR_IMAGE) DOCKER_BUILD_CONTEXT=$(ROOT_DIR)
 
-metering-e2e-docker-build: Dockerfile.e2e
+metering-src-docker-build: Dockerfile.src
 	$(MAKE) docker-build DOCKERFILE=$< IMAGE_NAME=$(METERING_E2E_IMAGE) DOCKER_BUILD_CONTEXT=$(ROOT_DIR)
 
 metering-operator-docker-build: $(METERING_OPERATOR_DOCKERFILE)
@@ -334,7 +334,7 @@ bin/test2json: gotools/test2json/main.go
 	docker-build docker-tag docker-push \
 	docker-build-all docker-tag-all docker-push-all \
 	metering-test-docker \
-	metering-e2e-docker-build \
+	metering-src-docker-build \
 	build-reporting-operator reporting-operator-bin reporting-operator-local \
 	penshift-metering chart \
 	bin/metering-override-values.yaml \

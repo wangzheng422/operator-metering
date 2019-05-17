@@ -194,7 +194,7 @@ reporting-operator:
       htpasswdSecretName: reporting-operator-auth-proxy-htpasswd
       image:
         pullPolicy: Always
-        repository: openshift/oauth-proxy
+        repository: {{openshift/oauth-proxy}}
         tag: v1.1.0
       resources:
         limits:
@@ -261,7 +261,7 @@ reporting-operator:
         secretName: reporting-operator-api-tls-secrets
     image:
       pullPolicy: Always
-      repository: quay.io/openshift/origin-metering-reporting-operator
+      repository: {{quay.io/openshift/origin-metering-reporting-operator}}
       tag: 4.1
     labels: {}
     livenessProbe:
@@ -342,7 +342,7 @@ presto:
         useHdfsConfigMap: true
       image:
         pullPolicy: Always
-        repository: quay.io/openshift/origin-metering-hive
+        repository: {{quay.io/openshift/origin-metering-hive}}
         tag: 4.1
       labels: {}
       metastore:
@@ -462,7 +462,7 @@ presto:
         tolerations: []
       image:
         pullPolicy: Always
-        repository: quay.io/openshift/origin-metering-presto
+        repository: {{quay.io/openshift/origin-metering-presto}}
         tag: 4.1
       labels: {}
       securityContext:
@@ -543,7 +543,7 @@ hdfs:
       tolerations: []
     image:
       pullPolicy: Always
-      repository: quay.io/openshift/origin-metering-hadoop
+      repository: {{quay.io/openshift/origin-metering-hadoop}}
       tag: 4.1
     namenode:
       affinity:
